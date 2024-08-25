@@ -26,23 +26,35 @@ namespace Mango.Web.Service
 
         public async Task<ResponseDto?> SendAsync(RequestDto requestDto)
         {
-            HttpClient client = _httpClientFactory.CreateClient("MangoApi");
-            HttpRequestMessage httpRequestMessage = new();
-            httpRequestMessage.Headers.Add("Accept", "application/json");
-
-            httpRequestMessage.RequestUri = new Uri(requestDto.Url);
-            if (requestDto.Data is not null)
+            try
             {
-                httpRequestMessage.Content = new StringContent(
-                    content: JsonConvert.SerializeObject(requestDto.Data),
-                    encoding: Encoding.UTF8,
-                    mediaType: "application/json");
+                HttpClient client = _httpClientFactory.CreateClient("MangoApi");
+                HttpRequestMessage httpRequestMessage = new();
+                httpRequestMessage.Headers.Add("Accept", "application/json");
+
+                httpRequestMessage.RequestUri = new Uri(requestDto.Url);
+                if (requestDto.Data is not null)
+                {
+                    httpRequestMessage.Content = new StringContent(
+                        content: JsonConvert.SerializeObject(requestDto.Data),
+                        encoding: Encoding.UTF8,
+                        mediaType: "application/json");
+                }
+
+                SetMethod(requestDto, httpRequestMessage);
+
+                HttpResponseMessage? httpResponseMessage = await client.SendAsync(httpRequestMessage);
+                return await SetHttpResponseMessage(httpResponseMessage);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto()
+                {
+                    ErrorMessage = ex.Message,
+                    IsSuccess = false,
+                };
             }
 
-            SetMethod(requestDto, httpRequestMessage);
-
-            HttpResponseMessage? httpResponseMessage = await client.SendAsync(httpRequestMessage);
-            return await SetHttpResponseMessage(httpResponseMessage);
         }
 
         private static async Task<ResponseDto?> SetHttpResponseMessage(HttpResponseMessage httpResponseMessage)
