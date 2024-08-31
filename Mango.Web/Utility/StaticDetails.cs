@@ -1,7 +1,7 @@
 ﻿namespace Mango.Web.Utility
 {
-    public class StaticDetails
+    public static class StaticDetails
     {
-        public string CouponBaseUrl { get; set; }
+        public static string CouponBaseUrl { get; set; }
     }
 }
