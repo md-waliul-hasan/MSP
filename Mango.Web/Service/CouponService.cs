@@ -20,7 +20,7 @@ namespace Mango.Web.Service
             {
                 ApiType = ApiType.POST,
                 Data = couponDto,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons",
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon",
             });
         }
 
@@ -29,7 +29,7 @@ namespace Mango.Web.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiType.DELETE,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons/GetByCode/" + id,
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon/GetByCode/" + id,
             });
         }
 
@@ -38,7 +38,7 @@ namespace Mango.Web.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiType.GET,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons",
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon",
             });
         }
 
@@ -47,7 +47,7 @@ namespace Mango.Web.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiType.GET,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons/GetByCode/" + couponCode,
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon/GetByCode/" + couponCode,
             });
         }
 
@@ -56,7 +56,7 @@ namespace Mango.Web.Service
             return await _baseService.SendAsync(new RequestDto
             {
                 ApiType = ApiType.GET,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons/GetByCode/" + id,
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon/GetByCode/" + id,
             });
         }
 
@@ -66,7 +66,7 @@ namespace Mango.Web.Service
             {
                 ApiType = ApiType.PUT,
                 Data = couponDto,
-                Url = StaticDetails.CouponBaseUrl + "/api/coupons",
+                Url = StaticDetails.CouponBaseUrl + "/api/coupon",
             });
         }
     }
